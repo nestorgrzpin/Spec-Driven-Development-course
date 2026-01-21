@@ -1,0 +1,31 @@
+# .devcontainer/docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Este es nuestro contenedor de desarrollo principal
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Monta el código fuente del proyecto en la carpeta /workspaces
+    volumes:
+      - ..:/workspaces:cached
+
+    # Mantén el contenedor corriendo
+    command: sleep infinity
+
+  # Este es el contenedor de la base de datos PostgreSQL
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=vscode
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=appdb
+
+volumes:
+  postgres-data:
