@@ -1,0 +1,30 @@
+{
+  "name": "Spec Driven Development Course",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+
+  "features": {
+    "ghcr.io/devcontainers/features/postgres:1": {
+      "version": "14",
+      "password": "mysecretpassword"
+    }
+  },
+
+  "postCreateCommand": "pipx install uv && pipx run uv tool install specify-cli --from git+https://github.com/github/spec-kit.git",
+
+  "forwardPorts": [3000, 5432],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "github.copilot",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  },
+
+  "remoteUser": "vscode"
+}
